@@ -2,18 +2,20 @@ import React from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin} from '@react-oauth/google';
 import { googleAuth} from '../../api/api';
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
+  const navigate = useNavigate();
   const responseGoogle = async (authResult) => {
-    console.log(authResult);
     try {
       if (authResult["credential"]) {
-        console.log('Auth code:', authResult["clientId"]);
         if (authResult["credential"]) {
             const result = await googleAuth(authResult.credential);
-            const {email, name, image} = result.data.user;
+            console.log(result);
+            const {email, name, pic } = result.data.user;
             const token = result.data.token;
-            const obj = {email,name, token, image};
-            console.log(obj);
+            const obj = {email,name, token, pic};
+            localStorage.setItem('user-info', JSON.stringify(obj));
+          navigate('/app');
         }
         // Handle the auth code
       } else {
