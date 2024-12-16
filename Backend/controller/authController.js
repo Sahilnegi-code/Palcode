@@ -1,24 +1,20 @@
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
-const { oauth2Client } = require('../util/googleConfig');
 const jwt_decode=  require("jwt-decode");
 const dotenv = require('dotenv'); 
 dotenv.config();
-const User = require('../modals/userModal');
+const socialSchemaLogins = require('../modals/userModal');
 
 /* GET Google Authentication API. */
 exports.googleAuth = async (req, res, next) => {
     const code = req.query.code;
     console.log(code);
     try {
-        // oauth2Client.setCredentials(googleRes.tokens);
         let userRes = jwt_decode.jwtDecode(code);
         const { email, name, picture } = userRes;
-        // console.log(userRes);
-        let user = await User.findOne({ email });
-
+        let user = await socialSchemaLogins.findOne({ email });
         if (!user) {
-            user = await User.create({
+            user = await socialSchemaLogins.create({
                 name,
                 email,
                 image: picture,

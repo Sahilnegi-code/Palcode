@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-const bcrypt =  require('bcryptjs')
 
-const userSchema = new mongoose.Schema(
+const socialSchemaLogins = new mongoose.Schema(
 {
     
     name : {
@@ -26,6 +25,6 @@ const userSchema = new mongoose.Schema(
     }
     );
  
-  const user = mongoose.model("social-logins", userSchema);
+  const user = mongoose.model("social-logins", socialSchemaLogins);
   module.exports = user;
   
