@@ -12,7 +12,7 @@ useEffect(()=>{
     console.log(token);
     if( token ){
         setIsAuthenticated(true);
-        if(location.pathname  === '/login' || location.pathname  === '/'){
+        if(location.pathname  === '/login' || location.pathname  === '/' ||  location.pathname === '/app' ){
             navigate('/app');
         }
     }
