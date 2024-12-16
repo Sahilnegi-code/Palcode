@@ -1,9 +1,9 @@
 const express =  require("express");
-const data = require("./data/notes.js")
 const dotenv = require('dotenv'); 
 const cors = require("cors");
 const connectDB = require("./config/db");
 const authRouter = require('./routes/authRouter.js')
+const layoutRouter = require('./routes/LayoutRouter.js');
 const path = require('path');
 const app = express();
 dotenv.config();
@@ -28,13 +28,10 @@ __dirname = path.resolve();
 
 // deployment
 app.use('/auth',authRouter);
+app.use('/api',layoutRouter);
+
+
 
 const PORT = process.env.PORT ;
-console.log(PORT)
-// app.get('/api/notes/:id',(req,res)=>{
-//     const note = data.find((n)=>{ return   n._id === req.params.id; }); 
-//     res.send(PORT);
-// });
-
 app.listen( PORT , console.log(`server started on port  `));
 
