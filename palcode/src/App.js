@@ -17,9 +17,8 @@ function App() {
          <Router>
     <RefreshHandler setIsAuthenticated={setIsAuthenticated}/>
         <Routes>
-        <Route path="/"  element={<Login/>} />
-          <Route path="/login"  element={<Login/>} />
- 
+        <Route path="/"  element={ isAuthenticated ? <AppScreen/>:<Login/>} />
+          <Route path="/login"  element={  <Login/>} />
           <Route path="/app"  element={ <PrivateRoute element={<AppScreen/>} /> } />
         </Routes>
       
